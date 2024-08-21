@@ -1,4 +1,4 @@
-# a Go project to create a cli tool to add perform some crud operations for a simple task tracking tool.
+# a Go project to create a cli tool for tasks with crud operations for a simple task tracking tool.
 
 # CLI Package : [Cobra-Cli](https://github.com/spf13/cobra)
 ```bash
