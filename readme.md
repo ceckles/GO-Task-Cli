@@ -21,9 +21,12 @@ $ ./task list -a #built
 
 # Todo
 - [x] Add a flag to list all tasks
-- - [x] load the tasks from a file
+- - [x] load the tasks from a file(csv)
 - - [x] function to display the tasks
-- - [ ] clear up display of the tasks
+- - [ ] function to display short task list
+- [ ] Add task command
+- - [x] open file and append new task
+- - [x] add new task and update ID 
 - [ ] Add a flag to show a specific task
 - [ ] Add a flag to delete a specific task
 - [ ] Add a flag to edit a specific task
