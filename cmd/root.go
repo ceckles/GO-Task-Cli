@@ -6,9 +6,6 @@ package cmd
 
 import (
 	"os"
-	//"encoding/csv"
-	//"strconv"
-	//"text/tabwriter"
 	"github.com/spf13/cobra"
 )
 
