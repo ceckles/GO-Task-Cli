@@ -6,3 +6,25 @@
 $ cobra-cli init
 $ cobra-cli add <task name>
 ```
+
+#Go
+```bash
+#Run the project
+$ go run main.go
+#build the project
+$ go build
+
+#Run the project with the flag
+$ go run main.go list -a
+$ ./task list -a #built
+```
+
+# Todo
+- [x] Add a flag to list all tasks
+- - [x] load the tasks from a file
+- - [x] function to display the tasks
+- - [ ] clear up display of the tasks
+- [ ] Add a flag to show a specific task
+- [ ] Add a flag to delete a specific task
+- [ ] Add a flag to edit a specific task
+- [ ] Add a flag to add a new task
