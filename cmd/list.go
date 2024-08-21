@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 	"syscall"
-	"strings"
+	//"strings"
 	"github.com/spf13/cobra"
 )
 
@@ -33,7 +33,6 @@ to quickly create a Cobra application.`,
 				fmt.Println("Error loading file:", err)
 				return
 			}
-			//listAll(file)
 			if err := listAll(file); err != nil {
 				fmt.Println("Error listing all tasks:", err)
 			}
@@ -68,8 +67,8 @@ func listAll(file *os.File) error {
 	}
 
 	// Print the header
-	fmt.Printf("%-5s %-20s %-15s %-10s\n", "ID", "Task", "Date", "Complete")
-	fmt.Println(strings.Repeat("-", 50))
+	// fmt.Printf("%-5s %-50s %-20s %-5s\n", "ID", "Task", "Created", "Done")
+	// fmt.Println(strings.Repeat("-", 80)) // Adjusted the length based on column widths
 
 	// Print each record
 	for _, record := range records {
@@ -77,7 +76,7 @@ func listAll(file *os.File) error {
 			fmt.Println("Invalid record:", record)
 			continue
 		}
-		fmt.Printf("%-5s %-20s %-15s %-10s\n", record[0], record[1], record[2], record[3])
+		fmt.Printf("%-5s %-50s %-20s %-5s\n", record[0], record[1], record[2], record[3])
 	}
 
 	return nil
