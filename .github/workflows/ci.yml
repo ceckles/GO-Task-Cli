@@ -55,7 +55,7 @@ jobs:
           cat list_a_output.txt
 
           # Define the expected output
-          expected_output=$(cat <<EOF
+          expected_output=$(cat <<'EOF'
 ID  Task                                         Created     Done
 1)  Go to the store for milk.                    3 days ago  true
 2)  Read a book.                                 2 days ago  true
