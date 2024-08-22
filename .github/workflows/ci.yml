@@ -39,13 +39,13 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
-      # # Run tests
-      # - name: Run tests
-      #   run: go test -v ./...
+      # Run tests
+      - name: Run tests
+        run: go test -v ./...
 
       # Build the application
       - name: Build application
-        run: go build
+        run: go build -o app ./cmd/app # Adjust path to your main package if needed
 
       # Test the `list -a` command
       - name: Test `list -a` command
@@ -53,15 +53,18 @@ jobs:
           ./app list -a | tee list_a_output.txt
           echo "Output of 'list -a' command:"
           cat list_a_output.txt
-          
+
           # Define the expected output
-          expected_output="ID  Task                                         Created     Done
+          expected_output=$(cat <<EOF
+ID  Task                                         Created     Done
 1)  Go to the store for milk.                    3 days ago  true
 2)  Read a book.                                 2 days ago  true
 3)  Set the trash out front.                     2 days ago  false
 4)  Reset the alarm for earlier time to wakeup.  2 days ago  true
 5)  Put laundry in the wash .                    a day ago   true
-6)  Meal plan for the coming two weeks.          a day ago   false"
+6)  Meal plan for the coming two weeks.          a day ago   false
+EOF
+          )
 
           # Validate the output
           if [[ "$(cat list_a_output.txt)" == "$expected_output" ]]; then
