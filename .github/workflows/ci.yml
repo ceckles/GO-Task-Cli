@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build, Test, and Run CLI Commands
+    name: Build and Test `list -a` Command
     runs-on: ubuntu-latest
 
     steps:
@@ -39,19 +39,14 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
-      # # Run tests
-      # - name: Run tests
-      #   run: go test -v ./...
-
       # Build the application
       - name: Build application
-        run: go build
-
+        run: go build -o task ./cmd/task # Adjust path to your main package if needed
 
       # Test the `list -a` command
       - name: Test `list -a` command
         run: |
-          echo "Running './app list -a'"
-          ./app list -a > list_a_output.txt
+          echo "Running './task list -a'"
+          ./task list -a > list_a_output.txt
           echo "Output of 'list -a' command:"
           cat list_a_output.txt
