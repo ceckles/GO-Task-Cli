@@ -1,4 +1,4 @@
-name: Go CI
+name: Build and Test
 
 on:
   push:
@@ -47,31 +47,52 @@ jobs:
       - name: Build application
         run: go build -o app ./...
 
-      # Run CLI Commands
-      - name: Test list -a command
-        run: ./app list -a | tee list_a_output.txt
-        # Add assertions or checks on the output if needed
-        # Example: test output file contains expected data
-        # run: grep "expected output" list_a_output.txt
+      # Test the `list` command
+      - name: Test `list` command
+        run: |
+          ./app list | tee list_output.txt
+          # Example assertion (customize as needed)
+          if grep -q "expected initial output" list_output.txt; then
+            echo "List command works as expected."
+          else
+            echo "List command output is not as expected."
+            exit 1
+          fi
 
-      - name: Test list command
-        run: ./app list | tee list_output.txt
-        # Add assertions or checks on the output if needed
-        # Example: test output file contains expected data
-        # run: grep "expected output" list_output.txt
+      # Test the `list -a` command
+      - name: Test `list -a` command
+        run: |
+          ./app list -a | tee list_a_output.txt
+          # Example assertion (customize as needed)
+          if grep -q "expected output for list -a" list_a_output.txt; then
+            echo "List -a command works as expected."
+          else
+            echo "List -a command output is not as expected."
+            exit 1
+          fi
 
-      - name: Test add command
+      # Test the `add "new task"` command
+      - name: Test `add "new task"` command
         run: |
           ./app add "new task"
           ./app list | tee list_after_add_output.txt
-        # Verify the task was added
-        # Example: test output file contains the new task
-        # run: grep "new task" list_after_add_output.txt
+          # Example assertion (customize as needed)
+          if grep -q "new task" list_after_add_output.txt; then
+            echo "Add command works as expected."
+          else
+            echo "Add command did not add the task correctly."
+            exit 1
+          fi
 
-      - name: Test complete command
+      # Test the `complete 1` command
+      - name: Test `complete 1` command
         run: |
           ./app complete 1
           ./app list | tee list_after_complete_output.txt
-        # Verify the task was marked as complete
-        # Example: test output file shows task 1 as complete
-        # run: grep "task 1 status" list_after_complete_output.txt
+          # Example assertion (customize as needed)
+          if grep -q "1 true" list_after_complete_output.txt; then
+            echo "Complete command works as expected."
+          else
+            echo "Complete command did not update the task status correctly."
+            exit 1
+          fi
