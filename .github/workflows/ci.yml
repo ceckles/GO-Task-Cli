@@ -1,0 +1,77 @@
+name: Go CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build, Test, and Run CLI Commands
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Go environment
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.20' # Specify the Go version you want to use
+
+      # Cache Go modules
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      # Install dependencies
+      - name: Install dependencies
+        run: go mod download
+
+      # Run tests
+      - name: Run tests
+        run: go test -v ./...
+
+      # Build the application
+      - name: Build application
+        run: go build -o app ./...
+
+      # Run CLI Commands
+      - name: Test list -a command
+        run: ./app list -a | tee list_a_output.txt
+        # Add assertions or checks on the output if needed
+        # Example: test output file contains expected data
+        # run: grep "expected output" list_a_output.txt
+
+      - name: Test list command
+        run: ./app list | tee list_output.txt
+        # Add assertions or checks on the output if needed
+        # Example: test output file contains expected data
+        # run: grep "expected output" list_output.txt
+
+      - name: Test add command
+        run: |
+          ./app add "new task"
+          ./app list | tee list_after_add_output.txt
+        # Verify the task was added
+        # Example: test output file contains the new task
+        # run: grep "new task" list_after_add_output.txt
+
+      - name: Test complete command
+        run: |
+          ./app complete 1
+          ./app list | tee list_after_complete_output.txt
+        # Verify the task was marked as complete
+        # Example: test output file shows task 1 as complete
+        # run: grep "task 1 status" list_after_complete_output.txt
