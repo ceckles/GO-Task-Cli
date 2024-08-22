@@ -25,20 +25,10 @@ jobs:
       - name: Build application
         run: go build -o task
 
-      # Create a GitHub Release
+      # Create a GitHub Release and upload the binary
       - name: Create GitHub Release
-        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: task # Specify the file to upload as a release asset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Upload release notes
-      - name: Upload Release Notes
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: task
-          asset_name: task
-          asset_content_type: application/octet-stream
