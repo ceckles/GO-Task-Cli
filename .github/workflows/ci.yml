@@ -41,7 +41,7 @@ jobs:
 
       # Build the application
       - name: Build application
-        run: go build -o task ./cmd/task # Adjust path to your main package if needed
+        run: go build -o task
 
       # Test the `list -a` command
       - name: Test `list -a` command
