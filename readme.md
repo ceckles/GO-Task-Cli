@@ -23,11 +23,11 @@ $ ./task list -a #built
 - [x] Add a flag to list all tasks
 - - [x] load the tasks from a file(csv)
 - - [x] function to display the tasks
-- - [ ] function to display short task list
-- [ ] Add task command
+- - [x] function to display short task list -a vs no flag
+- [x] Add task command
 - - [x] open file and append new task
 - - [x] add new task and update ID 
-- [ ] Add a flag to show a specific task
+- [x] Add cmd to mark task as done
+- - [x] check if task is done prior to marking it as done
 - [ ] Add a flag to delete a specific task
 - [ ] Add a flag to edit a specific task
-- [ ] Add a flag to add a new task
