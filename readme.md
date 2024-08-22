@@ -31,3 +31,5 @@ $ ./task list -a #built
 - - [x] check if task is done prior to marking it as done
 - [ ] Add a flag to delete a specific task
 - [ ] Add a flag to edit a specific task
+- [x] CI workflow
+- [x] Release workflow
