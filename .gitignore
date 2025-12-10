@@ -24,4 +24,11 @@
 # Go workspace file
 go.work
 
+# Build output
+task
+/task
+
+# CSV data files (optional - remove if you want to track tasks.csv)
+tasks.csv
+
 # End of https://www.toptal.com/developers/gitignore/api/go
